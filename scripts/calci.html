@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share&display=swap');
+        html,body{
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        body{
+            background: linear-gradient(200deg, #000000 0%, #a6a6a6 100%);
+        }
+        .cal{
+            background-color: #777;
+            width: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            box-shadow: 0 6px 0 #666, 0 8px 10px rgba(0,0,0,0.45);
+            border-radius: 5px;
+
+        }
+
+        .result{
+            background-color: #aaa;
+            width: 90%;
+            margin: 10px 0 10px 12px;
+            line-height: 50px;
+            font-size: 35px;
+            padding: 0 2px;
+            text-align: right;
+            overflow: hidden;
+            border: 1px solid black;
+            border-radius: 5px;
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
+        }
+
+        ul{
+            padding: 0;
+            margin: 0;
+            font-family: 'Share', cursive;
+
+        }
+
+        ul li{
+            list-style: none;
+            background-color: #555;
+            padding: 10px;
+            margin: 5px;
+            width: 15%;
+            float: left;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 6px 0 #666, inset 0 2px 0 #999;
+        }
+
+        ul li:active{
+            position: relative;
+            top: 5px;
+        }
+
+        ul li:nth-child(16){
+            height: 66px;
+            line-height: 66px;
+        }
+
+        ul li:last-child{
+            margin-top: -43px;
+            width: 65%;
+        }
+        .sign{
+            position: relative;
+            right: 10px;
+            float: right;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="cal">
+        <div class="result">0</div>
+        <ul>
+            <li>C</li>
+            <li>*</li>
+            <li>/</li>
+            <li>.</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>+</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>-</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>=</li>
+            <li>0</li>
+        </ul>
+        <div class="sign">-Rohan Nag</div>
+    </div>
+
+    <script>
+        liNodes = document.querySelectorAll("li");
+
+        liNodes.forEach(node => {
+            node.addEventListener("click", function(event){
+                event.preventDefault();
+                val = node.innerText.trim();
+                resultNode = document.querySelector(".result");
+                resultText = resultNode.innerText.trim();
+                
+                if(resultText == '0' || resultText == 'undefined' || resultText == 'Infinity')
+                {
+                    resultNode.innerText ='';
+                }
+
+                if(val == '=')
+                {
+                    resultNode.innerText = eval(resultText);
+                    return true;
+                }
+                if(val == 'C')
+                {
+                    resultNode.innerText = 0;
+                    return true;
+                }
+
+                resultNode.append(val)
+            })
+
+        });
+    </script>
+</body>
+</html>
